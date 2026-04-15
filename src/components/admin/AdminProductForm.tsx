@@ -34,9 +34,9 @@ const parseDecantSizes = (text: string) => {
     if (!Array.isArray(parsed)) return { sizes: null, error: "Decant sizes must be a JSON array." };
     for (const item of parsed) {
       if (typeof item !== "object" || item === null) return { sizes: null, error: "Each decant size must be an object." };
-      if (typeof (item as DecantSize).size_ml !== "number" || (item as DecantSize).size_ml <= 0)
+      if (typeof (item as DecantSize).size_ml !== "number" || ((item as DecantSize).size_ml ?? 0) <= 0)
         return { sizes: null, error: "Each size_ml must be a positive number." };
-      if (typeof (item as DecantSize).price !== "number" || (item as DecantSize).price <= 0)
+      if (typeof (item as DecantSize).price !== "number" || ((item as DecantSize).price ?? 0) <= 0)
         return { sizes: null, error: "Each price must be a positive number." };
     }
     return { sizes: parsed as DecantSize[], error: null };
